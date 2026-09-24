@@ -1,10 +1,26 @@
-import { createContext, useContext, useState, useCallback } from "react";
+import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 
 const CartContext = createContext(null);
 
 export function CartProvider({ children }) {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(() => {
+    try {
+      const saved = localStorage.getItem("meiyo_cart");
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("meiyo_cart", JSON.stringify(items));
+    } catch (e) {
+      console.error("Erreur sauvegarde panier", e);
+    }
+  }, [items]);
 
   const addItem = useCallback((product, qty = 1) => {
     setItems((prev) => {
@@ -35,12 +51,23 @@ export function CartProvider({ children }) {
 
   const clearCart = useCallback(() => setItems([]), []);
 
-  const total = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
-  const count = items.reduce((sum, i) => sum + i.quantity, 0);
+  const total = items.reduce((sum, i) => sum + (i.price || 0) * (i.quantity || 1), 0);
+  const count = items.reduce((sum, i) => sum + (i.quantity || 1), 0);
 
   return (
     <CartContext.Provider
-      value={{ items, addItem, removeItem, updateQuantity, clearCart, total, count, isOpen, setIsOpen }}
+      value={{
+        items,
+        addItem,
+        addToCart: addItem, // Alias de commodité
+        removeItem,
+        updateQuantity,
+        clearCart,
+        total,
+        count,
+        isOpen,
+        setIsOpen,
+      }}
     >
       {children}
     </CartContext.Provider>

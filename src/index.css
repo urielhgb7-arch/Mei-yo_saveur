@@ -1,21 +1,22 @@
 @import "tailwindcss";
 
 @theme {
-  --font-serif: "Cormorant Garamond", Georgia, serif;
-  --font-sans: "Inter", system-ui, sans-serif;
+  --font-serif: "Fraunces", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
 }
 
-/* ── Brand tokens ───────────────────────────── */
+/* ── Brand tokens (Charte officielle Mei'yo) ── */
 :root {
-  --mei-green: #1b3a2e;
-  --mei-green-soft: #2a5a44;
-  --mei-sand: #f2e7c9;
-  --mei-cream: #faf6ed;
-  --mei-yellow: #e8c547;
-  --mei-brown: #5c3317;
-  --mei-bronze: #8b5e3c;
-  --mei-ink: #1a1a1a;
-  --mei-muted: #6b6b6b;
+  --mei-green: #366848;       /* Vert Mei'yo officiel */
+  --mei-green-deep: #254631;  /* Vert forêt profond */
+  --mei-green-light: #A7C0A1; /* Vert sauge clair */
+  --mei-yellow: #F0D28E;      /* Jaune doux */
+  --mei-cream: #FFFBF3;       /* Beige crème fond */
+  --mei-cream-warm: #FFF8E3;  /* Crème chaude */
+  --mei-brown: #4A2E20;       /* Brun cacao */
+  --mei-sand: #F2E7C9;        /* Sable doré */
+  --mei-ink: #1F241E;         /* Noir organique / encre végétale */
+  --mei-muted: #6B7268;       /* Gris végétal neutre */
 }
 
 /* serene background grain */
@@ -23,13 +24,13 @@ html {
   scroll-behavior: smooth;
 }
 body {
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
   background: var(--mei-cream);
   color: var(--mei-ink);
   overflow-x: hidden;
 }
 h1, h2, h3, .serif {
-  font-family: "Cormorant Garamond", Georgia, serif;
+  font-family: "Fraunces", Georgia, serif;
 }
 
 /* custom scrollbar */

@@ -1,24 +1,30 @@
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Leaf, Lightbulb, Smile, Heart, Sparkles } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const pillars = [
   {
-    icon: "🌿",
+    icon: Leaf,
     title: "Authenticité",
-    text: "Chaque recette est un héritage, transmis de génération en génération. Pas de raccourcis, pas d'artifice.",
+    text: "Des recettes transmises avec passion, du vrai lait local et aucun conservateur ni sucre raffiné.",
   },
   {
-    icon: "🤲",
-    title: "Artisanat",
-    text: "Fait main avec des ingrédients locaux et frais. Le savoir-faire au cœur de chaque bouchée.",
+    icon: Lightbulb,
+    title: "Originalité",
+    text: "Pâte à pastel à base de banane mûre et yaourts aux sirops de fruits infusés au pur jus de canne.",
   },
   {
-    icon: "💛",
+    icon: Smile,
+    title: "Joie",
+    text: "Le plaisir simple et réconfortant d'une douceur partagée en famille ou entre amis à Cotonou.",
+  },
+  {
+    icon: Heart,
     title: "Générosité",
-    text: "Des portions franches, des prix justes. On cuisine pour nourrir, pas pour impressionner.",
+    text: "Des portions riches et savoureuses pensées avec soin et amour pour le délice de vos papilles.",
   },
 ];
 
@@ -33,38 +39,38 @@ export default function Story() {
       gsap.from(headingRef.current, {
         scrollTrigger: {
           trigger: headingRef.current,
-          start: "top 80%",
-          toggleActions: "play none none none",
-        },
-        y: 60,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out",
-      });
-
-      gsap.from(textRef.current, {
-        scrollTrigger: {
-          trigger: textRef.current,
-          start: "top 80%",
+          start: "top 85%",
           toggleActions: "play none none none",
         },
         y: 40,
         opacity: 0,
         duration: 0.9,
         ease: "power3.out",
-        delay: 0.2,
+      });
+
+      gsap.from(textRef.current, {
+        scrollTrigger: {
+          trigger: textRef.current,
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        delay: 0.15,
       });
 
       gsap.from(cardsRef.current?.children || [], {
         scrollTrigger: {
           trigger: cardsRef.current,
-          start: "top 80%",
+          start: "top 85%",
           toggleActions: "play none none none",
         },
-        y: 50,
+        y: 40,
         opacity: 0,
-        duration: 0.8,
-        stagger: 0.15,
+        duration: 0.7,
+        stagger: 0.12,
         ease: "power3.out",
       });
     }, sectionRef);
@@ -76,59 +82,50 @@ export default function Story() {
     <section
       id="story"
       ref={sectionRef}
-      className="py-32 px-6"
-      style={{ background: "var(--mei-cream)" }}
+      className="py-24 md:py-32 px-4 sm:px-6 bg-[#FFFBF3] relative"
     >
       <div className="max-w-6xl mx-auto">
-        {/* Heading */}
-        <div className="text-center mb-20">
-          <p
-            className="text-sm uppercase tracking-[0.3em] font-semibold mb-4"
-            style={{ color: "var(--mei-green-soft)" }}
-          >
-            Notre Histoire
-          </p>
+        {/* En-tête */}
+        <div className="text-center mb-16 md:mb-20">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#366848]/10 text-[#254631] text-xs font-semibold uppercase tracking-wider mb-4">
+            <Sparkles className="w-3.5 h-3.5 text-[#366848]" />
+            Notre Philosophie
+          </div>
           <h2
             ref={headingRef}
-            className="text-4xl md:text-6xl font-bold serif mb-8"
-            style={{ color: "var(--mei-green)" }}
+            className="text-3xl sm:text-5xl md:text-6xl font-bold font-serif text-[#254631] mb-6"
           >
-            La maison des gourmands
+            L'Artisanal au Cœur de Cotonou
           </h2>
           <p
             ref={textRef}
-            className="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed"
-            style={{ color: "var(--mei-muted)" }}
+            className="text-base sm:text-lg md:text-xl max-w-3xl mx-auto leading-relaxed text-[#6B7268] font-sans"
           >
-            Mei'yo est née d'un simple rêve : celui de redonner aux familles les
-            saveurs authentiques de leur enfance. Nos produits artisanaux — pastels,
-            crêpes, flans et yaourts — sont préparés avec des ingrédients locaux,
-            du cœur de notre cuisine à votre table. Depuis notre création, nous
-            croyons que le vrai goût se trouve dans la simplicité, la fraîcheur
-            et l'amour du métier.
+            Mei'yo est née d'une idée simple : réinventer les petites gourmandises du quotidien en douceurs saines, onctueuses et 100% faites maison. De nos yaourts signatures aux pastels à la pâte de banane, nous valorisons avec fierté les trésors du terroir béninois.
           </p>
         </div>
 
-        {/* Pillars */}
-        <div ref={cardsRef} className="grid md:grid-cols-3 gap-8">
-          {pillars.map((p) => (
-            <div
-              key={p.title}
-              className="glass rounded-2xl p-8 text-center shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1"
-              style={{ border: "1px solid rgba(27,58,46,0.08)" }}
-            >
-              <div className="text-4xl mb-5">{p.icon}</div>
-              <h3
-                className="text-xl font-bold serif mb-3"
-                style={{ color: "var(--mei-green)" }}
+        {/* 4 Valeurs Fondatrices du Brand Board */}
+        <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {pillars.map((p) => {
+            const Icon = p.icon;
+            return (
+              <div
+                key={p.title}
+                className="rounded-3xl p-6 sm:p-7 text-center bg-white border border-[#F0D28E]/40 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex flex-col items-center"
               >
-                {p.title}
-              </h3>
-              <p className="text-sm leading-relaxed" style={{ color: "var(--mei-muted)" }}>
-                {p.text}
-              </p>
-            </div>
-          ))}
+                <div className="w-14 h-14 rounded-2xl bg-[#FFF8E3] border border-[#F0D28E] flex items-center justify-center mb-5 text-[#366848] shadow-inner">
+                  <Icon className="w-6 h-6 text-[#366848]" />
+                </div>
+                <h3 className="text-xl font-bold font-serif text-[#254631] mb-2.5">
+                  {p.title}
+                </h3>
+                <p className="text-xs sm:text-sm leading-relaxed text-[#6B7268] font-sans">
+                  {p.text}
+                </p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

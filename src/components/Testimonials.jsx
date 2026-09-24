@@ -1,24 +1,28 @@
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Quote, Star } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const testimonials = [
   {
-    text: "Les pastels de Mei'yo me rappellent ceux de ma grand-mère. C'est exactement ça — le goût du vrai.",
+    text: "Le yaourt bissap-pastèque est une révélation absolue ! L'onctuosité du lait avec la touche acidulée du bissap et le goût doux de la canne, c'est du génie.",
     author: "Amina K.",
-    role: "Cliente fidèle",
+    role: "Cotonou (Haie Vive)",
+    product: "Yaourt Signature Bissap-Pastèque",
   },
   {
-    text: "Le flan à la vanille est une pure merveille. On ne peut plus s'en passer dans notre foyer.",
-    author: "Ibrahim D.",
-    role: "Client depuis 2024",
+    text: "La pâte des pastels à la banane change tout : c'est croustillant, légèrement doux et la farce au bœuf épicé et fromage est ultra généreuse.",
+    author: "Marc-Aurèle T.",
+    role: "Client fidèle",
+    product: "Pastels Bœuf & Fromage",
   },
   {
-    text: "Le baobab au lait, c'est de l'Afrique dans un verre. Chaque gorgée est un voyage.",
-    author: "Fatima S.",
-    role: "Cliente régulière",
+    text: "Le flan coco au caramel ambré me rappelle exactement les goûters de mon enfance. Une texture veloutée incomparable, 100% fait maison.",
+    author: "Sophie D.",
+    role: "Cadjehoun",
+    product: "Flan Coco & Caramel",
   },
 ];
 
@@ -29,11 +33,11 @@ export default function Testimonials() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         ".testimonial-card",
-        { y: 40, opacity: 0 },
+        { y: 35, opacity: 0 },
         {
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top 80%",
+            start: "top 85%",
           },
           y: 0,
           opacity: 1,
@@ -49,52 +53,49 @@ export default function Testimonials() {
   return (
     <section
       ref={sectionRef}
-      className="py-24 px-6"
-      style={{ background: "var(--mei-cream)" }}
+      className="py-24 md:py-32 px-4 sm:px-6 bg-[#FFF8E3]/50 relative"
     >
       <div className="max-w-6xl mx-auto text-center">
-        <p
-          className="text-sm uppercase tracking-[0.3em] font-semibold mb-3"
-          style={{ color: "var(--mei-green-soft)" }}
-        >
-          Témoignages
+        <p className="text-xs uppercase tracking-[0.25em] font-semibold text-[#366848] mb-3">
+          Témoignages Gourmands
         </p>
-        <h2
-          className="text-4xl md:text-5xl font-bold serif mb-14"
-          style={{ color: "var(--mei-green)" }}
-        >
-          Ce qu'ils disent de nous
+        <h2 className="text-3xl sm:text-5xl font-bold font-serif text-[#254631] mb-14">
+          Leurs Papilles en Parlent
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {testimonials.map((t, i) => (
             <div
               key={i}
-              className="testimonial-card glass rounded-2xl p-8 text-left shadow-sm hover:shadow-xl transition-all duration-500"
-              style={{ border: "1px solid rgba(27,58,46,0.08)" }}
+              className="testimonial-card rounded-3xl p-7 text-left bg-white border border-[#F0D28E]/40 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
             >
-              <div
-                className="text-3xl mb-4 serif"
-                style={{ color: "var(--mei-yellow)" }}
-              >
-                "
-              </div>
-              <p
-                className="text-sm leading-relaxed mb-6"
-                style={{ color: "var(--mei-muted)" }}
-              >
-                {t.text}
-              </p>
               <div>
-                <p
-                  className="text-sm font-bold"
-                  style={{ color: "var(--mei-green)" }}
-                >
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-9 h-9 rounded-full bg-[#FFF8E3] border border-[#F0D28E] flex items-center justify-center text-[#366848]">
+                    <Quote className="w-4 h-4 fill-[#F0D28E] text-[#366848]" />
+                  </div>
+                  <div className="flex gap-0.5 text-[#F0D28E]">
+                    {[...Array(5)].map((_, idx) => (
+                      <Star key={idx} className="w-3.5 h-3.5 fill-[#F0D28E]" />
+                    ))}
+                  </div>
+                </div>
+
+                <p className="text-xs sm:text-sm leading-relaxed text-[#4A5568] mb-6 italic">
+                  "{t.text}"
+                </p>
+              </div>
+
+              <div className="pt-4 border-t border-[#F0D28E]/30">
+                <p className="text-sm font-bold font-serif text-[#254631]">
                   {t.author}
                 </p>
-                <p className="text-xs" style={{ color: "var(--mei-muted)" }}>
-                  {t.role}
-                </p>
+                <div className="flex items-center justify-between mt-0.5">
+                  <span className="text-xs text-[#6B7268]">{t.role}</span>
+                  <span className="text-[10px] text-[#366848] font-semibold bg-[#FFF8E3] px-2 py-0.5 rounded-full">
+                    {t.product}
+                  </span>
+                </div>
               </div>
             </div>
           ))}
