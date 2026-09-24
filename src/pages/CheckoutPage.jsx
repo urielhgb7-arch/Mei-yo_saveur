@@ -115,8 +115,16 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="pt-32 sm:pt-36 pb-24 px-4 sm:px-6 max-w-6xl mx-auto">
-      {/* En-tête */}
+    <div className="relative min-h-screen pt-32 sm:pt-36 pb-24 px-4 sm:px-6">
+      {/* Arrière-plan décoratif pour sublimer le glassmorphisme */}
+      <div 
+        className="fixed inset-0 z-0 bg-cover bg-center opacity-20 pointer-events-none mix-blend-multiply"
+        style={{ backgroundImage: "url('/images/hero_banner.jpg')" }}
+      />
+      <div className="fixed inset-0 z-0 bg-[#FFFBF3]/80 backdrop-blur-2xl pointer-events-none" />
+
+      <div className="relative z-10 max-w-6xl mx-auto">
+        {/* En-tête */}
       <div className="mb-10 text-center sm:text-left">
         <Link
           to="/menu"
@@ -249,16 +257,19 @@ export default function CheckoutPage() {
               />
             </div>
 
-            {/* Bouton de paiement principal */}
+            {/* Bouton de paiement principal (Effet 3D) */}
             <div className="pt-4">
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-4 rounded-full font-sans text-sm sm:text-base font-bold bg-[#254631] text-white hover:bg-[#366848] transition-all flex items-center justify-center gap-2 shadow-xl hover:scale-[1.01]"
+                className="group w-full py-4 rounded-2xl font-sans text-sm sm:text-base font-bold text-white transition-all flex items-center justify-center gap-2 
+                           bg-[#254631] shadow-[0_6px_0_#15291c] hover:bg-[#2d553b] hover:shadow-[0_4px_0_#15291c] hover:translate-y-[2px]
+                           active:translate-y-[6px] active:shadow-none
+                           disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-[0_6px_0_#15291c]"
               >
-                <CreditCard className="w-5 h-5 text-[#F0D28E]" />
+                <CreditCard className="w-5 h-5 text-[#F0D28E] transition-transform group-hover:scale-110" />
                 <span>Payer {new Intl.NumberFormat("fr-FR").format(total)} FCFA via Maketou</span>
-                <ArrowRight className="w-4 h-4 ml-1" />
+                <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
               </button>
             </div>
 
@@ -318,6 +329,7 @@ export default function CheckoutPage() {
               </span>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>
