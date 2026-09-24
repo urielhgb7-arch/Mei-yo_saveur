@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { createCheckoutSession, generateWhatsAppOrderUrl } from "../services/maketou";
 import LogoLoader from "../components/LogoLoader";
+import { LiquidButton } from "../components/ui/liquid-glass-button";
 import { ShoppingBag, ShieldCheck, ArrowRight, ArrowLeft, AlertCircle, CreditCard, MessageSquare } from "lucide-react";
 
 export default function CheckoutPage() {
@@ -143,8 +144,9 @@ export default function CheckoutPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Formulaire Client (7 colonnes) — Glassmorphisme élégant */}
-        <div className="lg:col-span-7 rounded-3xl p-6 sm:p-8 border border-[#F0D28E]/60 shadow-xl bg-white/70 backdrop-blur-xl ring-1 ring-white/50">
-          <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#254631] mb-6 flex items-center gap-2">
+        <div className="lg:col-span-7 rounded-3xl p-6 sm:p-8 border border-white/50 shadow-[0_8px_32px_rgba(37,70,49,0.1)] bg-white/40 backdrop-blur-2xl ring-1 ring-white/60 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent pointer-events-none rounded-3xl" />
+          <h2 className="relative z-10 font-serif text-xl sm:text-2xl font-bold text-[#254631] mb-6 flex items-center gap-2">
             <span>Coordonnées de Livraison</span>
           </h2>
 
@@ -165,7 +167,7 @@ export default function CheckoutPage() {
             </div>
           )}
 
-          <form onSubmit={handleCheckout} className="space-y-4">
+          <form onSubmit={handleCheckout} className="space-y-4 relative z-10">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-semibold text-[#254631] uppercase tracking-wider mb-1.5">
@@ -257,24 +259,20 @@ export default function CheckoutPage() {
               />
             </div>
 
-            {/* Bouton de paiement principal (Effet 3D) */}
+            {/* Bouton de paiement Liquid Glass */}
             <div className="pt-4">
-              <button
+              <LiquidButton
                 type="submit"
                 disabled={loading}
-                className="group w-full py-4 rounded-2xl font-sans text-sm sm:text-base font-bold text-white transition-all flex items-center justify-center gap-2 
-                           bg-[#254631] shadow-[0_6px_0_#15291c] hover:bg-[#2d553b] hover:shadow-[0_4px_0_#15291c] hover:translate-y-[2px]
-                           active:translate-y-[6px] active:shadow-none
-                           disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-[0_6px_0_#15291c]"
               >
                 <CreditCard className="w-5 h-5 text-[#F0D28E] transition-transform group-hover:scale-110" />
                 <span>Payer {new Intl.NumberFormat("fr-FR").format(total)} FCFA via Maketou</span>
                 <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
-              </button>
+              </LiquidButton>
             </div>
 
             {/* Garanties */}
-            <div className="pt-3 flex items-center justify-center gap-2 text-xs text-[#6B7268]">
+            <div className="pt-3 flex items-center justify-center gap-2 text-xs text-[#6B7268] relative z-10">
               <ShieldCheck className="w-4 h-4 text-[#366848]" />
               <span>Transaction 100% sécurisée via Maketou Payments</span>
             </div>
