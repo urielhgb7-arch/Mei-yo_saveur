@@ -6,9 +6,7 @@ app.use(cors());
 app.use(express.json());
 
 const MAKETOU_API_URL = process.env.MAKETOU_API_URL || "https://api.maketou.net";
-const MAKETOU_API_KEY =
-  process.env.MAKETOU_API_KEY ||
-  "msk_ad1b23569f4887fa5007ee058fa447ceaaf6a8a142beec693e75e9cae2179c0b";
+const MAKETOU_API_KEY = process.env.MAKETOU_API_KEY || "";
 
 // En-têtes pour sécuriser l'API
 const getHeaders = () => ({
